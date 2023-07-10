@@ -2,6 +2,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework import status
+from django.shortcuts import render
 import requests
 from django.conf import settings
 from django.http import JsonResponse
@@ -9,6 +10,26 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import WeatherForecast
 from django.utils import timezone
 from .api_url import get_api_url
+from .forms import WeatherForecastForm
+
+def index(request):
+    context = {}
+    form = WeatherForecastForm()
+    context['form'] = form
+    if request.method == 'POST':
+        form = WeatherForecastForm(request.POST)
+        if form.is_valid():
+            lat = form.cleaned_data['latitude']
+            lon = form.cleaned_data['longitude']
+            detailing_type = form.cleaned_data['detail']
+            host_url = request.build_absolute_uri('/')
+            api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
+            Weather_data = requests.get(api_endpoint_url).json()
+            context['Weather_Data'] = Weather_data
+            return render(request,'index.html',context)
+        else:
+            context['errors'] = form.errors
+    return render(request,'index.html',context)
 
 class weatherapi(ViewSet):
     permission_classes = [AllowAny]
@@ -37,16 +58,3 @@ class weatherapi(ViewSet):
     def is_data_up_to_date(weather_forecast):
         delta = timezone.now() - weather_forecast.timestamp
         return delta.total_seconds() <= int(settings.LOCAL_DATA_EXPIRATION)
-
-# @csrf_exempt
-# def index(request):
-#     if request.method == 'GET':
-#         lat = request.GET.get('lat')
-#         lon = request.GET.get('lon')
-#         detailing_type = request.GET.get('detailing_type')
-
-#         weather_data = get_weather_data(lat, lon, detailing_type)
-
-#         return JsonResponse({'weather_data': weather_data})
-
-#     return JsonResponse({'error': 'Invalid request method'})
