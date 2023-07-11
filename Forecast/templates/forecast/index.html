@@ -1,8 +1,5 @@
-{% extends 'forecast/base.html' %}
-{% block title %} 
-Weather Forecast App 
-{% endblock %} 
-{% block content %}
+{% extends 'forecast/base.html' %} {% load custom_filters %} {% block title %}
+Weather Forecast App {%endblock %} {% block content %}
 <div class="row">
     <div class="column">
         <div class="container mt-5">
@@ -43,6 +40,41 @@ Weather Forecast App
         </div>
     </div>
 </div>
+{% if detail == "current" %}
+<div class="card" style="width: 18rem">
+    <div class="card-body">
+        <h5 class="card-text">{{ Weather_Data.dt|unix_to_datetime }}</h5>
+        <p class="card-text">{{ Weather_Data.weather.0.description }}</p>
+        <p class="card-text">
+            Temperature: {{ Weather_Data.main.temp|kev_cel }} °C
+        </p>
+        <p class="card-text">
+            Feels like: {{ Weather_Data.main.feels_like|kev_cel }} °C
+        </p>
+        <p class="card-text">Humidity: {{ Weather_Data.main.humidity }}%</p>
+        <p class="card-text">Wind Speed: {{ Weather_Data.wind.speed }} m/s</p>
+        {% if Weather_Data.rain %}
+        <p class="card-text">RainFall (1h): {{ Weather_Data.rain.1h }} m/s</p>
+        {% endif %}
+    </div>
+</div>
+{% else %} {% for item in Weather_Data.list|slice:":7" %}
+<div class="card mb-3" style="max-width: 18rem">
+    <div class="card-body">
+        <h5 class="card-title">{{ item.dt_txt }}</h5>
+        <p class="card-text">{{ item.weather.0.description }}</p>
+        <h6 class="card-subtitle mb-2 text-muted">
+            Temperature: {{ item.main.temp|kev_cel  }}°C
+        </h6>
+        <p class="card-text">Feels like: {{ item.main.feels_like|kev_cel  }}°C</p>
+        <p class="card-text">Humidity: {{ item.main.humidity }}%</p>
+        <p class="card-text">Wind Speed: {{ item.wind.speed }} m/s</p>
+        {% if item.rain.3h %}
+        <p class="card-text">Rainfall (3h): {{ item.rain.3h }} mm</p>
+        {% endif %}
+    </div>
+</div>
+{% endfor %} {% endif %}
 <style>
     .row {
         display: flex;
@@ -68,12 +100,9 @@ Weather Forecast App
     }
 </style>
 <script>
-    const Wea_Data = JSON.parse("{{ Weather_Data|escapejs }}");
+    const Wea_Data = "{{ Weather_Data|escapejs }}";
     let pretty_json = JSON.stringify(Wea_Data, null, 2);
     document.getElementById("Weather").innerHTML = pretty_json;
     hljs.highlightBlock(document.getElementById("Weather"));
-</script>
-<script>
-    
 </script>
 {% endblock %}

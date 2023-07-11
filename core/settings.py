@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Forecast.apps.ForecastConfig',
     'rest_framework',
+    'Forecast.templatetags',
 ]
 
 MIDDLEWARE = [
