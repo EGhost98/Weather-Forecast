@@ -27,6 +27,7 @@ def index(request):
             api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
             Weather_data = requests.get(api_endpoint_url).json()
             context['Weather_Data'] = Weather_data
+            context['raw_json'] = json.dumps(Weather_data)
             context['detail'] = detailing_type
             return render(request, 'forecast/index.html', context)
         else:
