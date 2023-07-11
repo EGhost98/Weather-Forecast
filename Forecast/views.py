@@ -11,6 +11,7 @@ from .models import WeatherForecast
 from django.utils import timezone
 from .api_url import get_api_url
 from .forms import WeatherForecastForm
+import json
 
 def index(request):
     context = {}
@@ -25,11 +26,11 @@ def index(request):
             host_url = request.build_absolute_uri('/')
             api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
             Weather_data = requests.get(api_endpoint_url).json()
-            context['Weather_Data'] = Weather_data
-            return render(request,'index.html',context)
+            context['Weather_Data'] = json.dumps(Weather_data)
+            return render(request,'forecast/index.html',context)
         else:
             context['errors'] = form.errors
-    return render(request,'index.html',context)
+    return render(request,'forecast/index.html',context)
 
 class weatherapi(ViewSet):
     permission_classes = [AllowAny]

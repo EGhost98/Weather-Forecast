@@ -1,0 +1,85 @@
+{% extends 'forecast/base.html' %}
+{% block title %} 
+Weather Forecast App 
+{% endblock %} 
+{% block content %}
+<div class="row">
+    <div class="column">
+        <div class="container mt-5">
+            <form action="" method="post" class="form-inline mb-3 fadeIn">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group">{{ form.latitude }}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group">{{ form.longitude }}</div>
+                    </div>
+                    <div class="col-12 mb-3">{{ form.detail }}</div>
+                    <div class="col-12">
+                        <button class="btn btn-success w-100" type="submit">
+                            Forecast
+                        </button>
+                    </div>
+                </div>
+                {% if form.errors %}
+                <div class="alert alert-danger mt-4" role="alert">
+                    <p>{{ errors }}</p>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <div class="column">
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Weather Forecast Data</h5>
+                </div>
+                <div class="column">
+                    <pre><code id="Weather" class="json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding-bottom: 1rem;
+    }
+
+    .column {
+        flex-basis: 50%;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .column figure {
+        padding: 0px 12px;
+    }
+
+    pre {
+        background-color: #f3f3f3;
+        padding: 1rem;
+        overflow-x: auto;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/json-colorizer@2.2.2"></script>
+<script>
+    const Wea_Data = JSON.parse("{{ Weather_Data|escapejs }}");
+    const pretty_json = JSON.stringify(Wea_Data, null, 2);
+    pretty_json = jsonColorizer.colorize(pretty_json, {
+        colors: {
+            STRING_KEY: "green",
+            STRING_LITERAL: "magenta.bold",
+            NUMBER_LITERAL: "#FF0000",
+        },
+    });
+    document.getElementById("Weather").textContent = pretty_json;
+    hljs.highlightBlock(document.getElementById("Weather"));
+</script>
+{% endblock %}
