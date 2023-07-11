@@ -11,4 +11,4 @@ def unix_to_datetime(unix_time):
 @register.filter
 def kev_cel(kelvin):
     celsius = kelvin - 273.15
-    return round(celsius, 2)
+    return round(celsius)

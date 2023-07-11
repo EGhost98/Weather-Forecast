@@ -26,6 +26,9 @@ def index(request):
             host_url = request.build_absolute_uri('/')
             api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
             Weather_data = requests.get(api_endpoint_url).json()
+            if int(Weather_data['cod']) != 200:
+                context['errors'] = 'Api Key Dosen\'t have proper Authentication'
+                Weather_data = None
             context['Weather_Data'] = Weather_data
             context['raw_json'] = json.dumps(Weather_data)
             context['detail'] = detailing_type
@@ -52,7 +55,8 @@ class weatherapi(ViewSet):
         weather_data = response.json()
         if weather_forecast:
             weather_forecast.weather_data = weather_data
-            weather_forecast.save()
+            if int(weather_data['cod']) == 200:
+                weather_forecast.save()
         else:
             WeatherForecast.objects.create(latitude=lat, longitude=lon, detailing_type=detail, weather_data=weather_data)
             
