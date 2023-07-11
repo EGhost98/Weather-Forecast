@@ -67,19 +67,13 @@ Weather Forecast App
         overflow-x: auto;
     }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2"></script>
-<script src="https://cdn.jsdelivr.net/npm/json-colorizer@2.2.2"></script>
 <script>
     const Wea_Data = JSON.parse("{{ Weather_Data|escapejs }}");
-    const pretty_json = JSON.stringify(Wea_Data, null, 2);
-    pretty_json = jsonColorizer.colorize(pretty_json, {
-        colors: {
-            STRING_KEY: "green",
-            STRING_LITERAL: "magenta.bold",
-            NUMBER_LITERAL: "#FF0000",
-        },
-    });
-    document.getElementById("Weather").textContent = pretty_json;
+    let pretty_json = JSON.stringify(Wea_Data, null, 2);
+    document.getElementById("Weather").innerHTML = pretty_json;
     hljs.highlightBlock(document.getElementById("Weather"));
+</script>
+<script>
+    
 </script>
 {% endblock %}

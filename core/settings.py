@@ -135,14 +135,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
+GOOGLE_API = "AIzaSyD_fwihmQtcLYdjNEx2xeCFHxOiyZ1qThQ"
 
 #API KEY for open Weather Map
 OPENWEATHERMAP_API_KEY = os.environ.get("OPENWEATHERMAP_API_KEY", "a17eaff7c2a813d86ab7dc4659299a7a")
