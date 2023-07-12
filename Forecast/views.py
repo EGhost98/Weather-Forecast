@@ -17,8 +17,8 @@ def index(request):
     context = {}
     form = WeatherForecastForm()
     context['form'] = form
-    if request.method == 'GET':
-        form = WeatherForecastForm(request.GET)
+    if request.method == 'POST':
+        form = WeatherForecastForm(request.POST)
         if form.is_valid():
             lat = form.cleaned_data['latitude']
             lon = form.cleaned_data['longitude']
@@ -36,7 +36,6 @@ def index(request):
         else:
             context['errors'] = form.errors
     return render(request, 'forecast/index.html', context)
-
 
 class weatherapi(ViewSet):
     permission_classes = [AllowAny]
