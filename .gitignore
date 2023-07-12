@@ -9,4 +9,4 @@ env2/
 test.html
 
 #Static Files for Local Server (python manage.py collectstatic)
-staticfiles_build/
+staticfiles_build/static/
