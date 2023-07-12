@@ -80,27 +80,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Local SQLite3 DataBase For Tseting Purpose
 # (Uncomment below To run in local System, and comment out the below PostgreSQL DataBase Connection)
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL' : os.environ.get('POSTGRES_URL'),
-        'NAME': os.environ.get("POSTGRES_DATABASE"),
-        'USER': os.environ.get("POSTGRES_USER"),
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': os.environ.get("POSTGRES_HOST"),
-        'PORT': os.environ.get("POSTGRES_PORT"),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'URL' : os.environ.get('POSTGRES_URL'),
+#         'NAME': os.environ.get("POSTGRES_DATABASE"),
+#         'USER': os.environ.get("POSTGRES_USER"),
+#         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+#         'HOST': os.environ.get("POSTGRES_HOST"),
+#         'PORT': os.environ.get("POSTGRES_PORT"),
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         },
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
