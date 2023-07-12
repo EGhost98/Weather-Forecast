@@ -44,13 +44,15 @@ class weatherapi(ViewSet):
         lat = request.query_params.get('lat')
         lon = request.query_params.get('lon')
         detail = request.query_params.get('detail')
+        if not lat or not lon or not detail:
+            return Response({'detail': 'Invalid Parameters'}, status=status.HTTP_400_BAD_REQUEST)
         weather_forecast = WeatherForecast.objects.filter(latitude=lat, longitude=lon, detailing_type=detail).first()
         if weather_forecast and weatherapi.is_data_up_to_date(weather_forecast):
             return Response(weather_forecast.weather_data)
         api_key = settings.OPENWEATHERMAP_API_KEY
         api_url = get_api_url(detail,api_key,lat,lon)
         if not api_url:
-            return Response({'detail' : 'Invalid Parameters!'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail' : 'Invalid Parameters'},status=status.HTTP_400_BAD_REQUEST)
         response = requests.get(api_url)
         weather_data = response.json()
         if weather_forecast and int(weather_data['cod']) == 200:
@@ -65,3 +67,6 @@ class weatherapi(ViewSet):
         # print(weather_forecast.timestamp)
         # print(delta.total_seconds())
         return delta.total_seconds() <= int(settings.LOCAL_DATA_EXPIRATION)
+
+def error_404(request,  *args, **kwargs):
+    return render(request, '404.html', status=404)

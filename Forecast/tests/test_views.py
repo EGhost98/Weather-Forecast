@@ -7,6 +7,7 @@ from Forecast.views import index, weatherapi
 from Forecast.forms import WeatherForecastForm
 from Forecast.models import WeatherForecast
 from django.urls import reverse
+from rest_framework import status
 from rest_framework.test import APIRequestFactory
 from unittest.mock import patch
 from django.conf import settings
@@ -55,6 +56,7 @@ class IndexViewTest(TestCase):
 class WeatherAPIViewTest(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
+        self.view = weatherapi.as_view({'get': 'list'})
 
     @patch('Forecast.views.requests.get')
     def test_list_valid_request(self, mock_get):
@@ -81,7 +83,7 @@ class WeatherAPIViewTest(TestCase):
         request = self.factory.get(url, {'lat': lat, 'lon': lon, 'detail': detail})
         response = weatherapi.as_view({'get': 'list'})(request)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.data['detail'], 'Invalid Parameters!')
+        self.assertEqual(response.data['detail'], 'Invalid Parameters')
 
 
     def test_is_data_up_to_date(self):
@@ -96,3 +98,23 @@ class WeatherAPIViewTest(TestCase):
         delta = timezone.now() - weather_forecast.timestamp
         expiration_seconds = int(settings.LOCAL_DATA_EXPIRATION)
         self.assertEqual(delta.total_seconds() <= expiration_seconds, result)
+
+
+    def test_list_missing_parameters(self):
+        url = reverse('weather-list')
+        # 7-Cases
+        missing_parameter_combinations = [
+            {},
+            {'lat': '10.123'},
+            {'lon': '20.456'},
+            {'lat' : '10.123', 'lon' : '20.456'},
+            {'lat' : '10.123', 'detail' : 'current'},
+            {'detail' : 'current', 'lon' : '20.456'},
+            {'detail': 'current'},
+        ]
+
+        for params in missing_parameter_combinations:
+            request = self.factory.get(url, params)
+            response = self.view(request)
+            self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+            self.assertEqual(response.data['detail'], 'Invalid Parameters')
