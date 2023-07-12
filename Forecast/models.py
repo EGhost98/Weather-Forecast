@@ -1,8 +1,9 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 class WeatherForecast(models.Model):
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(validators=[MinValueValidator(-90), MaxValueValidator(90)])
+    longitude = models.FloatField(validators=[MinValueValidator(-180), MaxValueValidator(180)])
     DETAIL_CHOICES = [
         ('current', 'Current Weather'),
         ('three-hour', '3-Hour Forecast 5 Days'),
