@@ -8,7 +8,7 @@ weather_router.register(r'weather', views.weatherapi, basename='weather')
 
 urlpatterns = [
     path('api/', include(weather_router.urls)),
-    path('index',views.index, name='index'),
+    path('',views.index, name='index'),
 ]
 
 handler404 = views.error_404

@@ -1,5 +1,6 @@
-#Virtual environment
+#Virtual environments
 env/
+env2/
 
 #Enviromnt Variable
 .env
