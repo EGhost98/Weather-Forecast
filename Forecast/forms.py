@@ -12,7 +12,8 @@ class WeatherForecastForm(forms.Form):
     latitude = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control form-control-lg custom-field", "placeholder": "Latitude"}))
     longitude = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control form-control-lg custom-field", "placeholder": "Longitude"}))
     detail = forms.ChoiceField(choices=DETAIL_CHOICES, widget=forms.Select(attrs={"class": "form-control form-control-lg custom-field", "placeholder": "Detailing Type"}))
-
+    appid = forms.CharField(required=False,widget=forms.TextInput(attrs={"class": "form-control form-control-lg custom-field", "placeholder": "API Key For OpenWeather Map (Optional)"}))
+    
     def clean(self):
         cleaned_data = super().clean()
         latitude = cleaned_data.get('latitude')

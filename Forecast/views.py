@@ -23,15 +23,24 @@ def index(request):
             lat = form.cleaned_data['latitude']
             lon = form.cleaned_data['longitude']
             detailing_type = form.cleaned_data['detail']
+            appid = form.cleaned_data['appid']
             host_url = request.build_absolute_uri('/')
-            api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
+            api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}&appid={appid}'
             Weather_data = requests.get(api_endpoint_url).json()
-            if int(Weather_data['cod']) != 200:
-                context['errors'] = 'Api Key Dosen\'t have Required Authentication (Limited Access).'
+            context['raw_json'] = json.dumps(Weather_data)
+            if int(Weather_data['cod']) == 401:
+                context['errors'] = 'Invalid API Key, Dosen\'t have Required Authentication'
                 Weather_data = None
             context['Weather_Data'] = Weather_data
-            context['raw_json'] = json.dumps(Weather_data)
             context['detail'] = detailing_type
+            if appid:
+                context['last_appid'] = appid
+            if lat:
+                form.fields['latitude'].widget.attrs['value'] = lat
+            if lon:
+                context['last_lon'] = lon
+            if detailing_type:
+                context['last_detail'] = detailing_type
             return render(request, 'forecast/index.html', context)
         else:
             context['errors'] = form.errors
@@ -44,12 +53,16 @@ class weatherapi(ViewSet):
         lat = request.query_params.get('lat')
         lon = request.query_params.get('lon')
         detail = request.query_params.get('detail')
+        appid = request.query_params.get('appid')
         if not lat or not lon or not detail:
             return Response({'detail': 'Invalid Parameters'}, status=status.HTTP_400_BAD_REQUEST)
         weather_forecast = WeatherForecast.objects.filter(latitude=lat, longitude=lon, detailing_type=detail).first()
         if weather_forecast and weatherapi.is_data_up_to_date(weather_forecast):
             return Response(weather_forecast.weather_data)
-        api_key = settings.OPENWEATHERMAP_API_KEY
+        if appid:
+            api_key = appid
+        else:
+            api_key = settings.OPENWEATHERMAP_API_KEY
         api_url = get_api_url(detail,api_key,lat,lon)
         if not api_url:
             return Response({'detail' : 'Invalid Parameters'},status=status.HTTP_400_BAD_REQUEST)

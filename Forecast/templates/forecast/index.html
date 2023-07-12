@@ -26,8 +26,19 @@
                                 <div class="d-flex align-items-center">
                                     <label for="detail" class="font-weight-bold text-dark mr-2">Detailing Type:</label>
                                     {{ form.detail }}
+                                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-target="#settings" aria-expanded="false" aria-controls="settings">
+                                        <i class="fas fa-cog"></i>
+                                    </button> 
                                 </div>
-                            </div>                                                       
+                            </div>                          
+                            <div class="collapse" id="settings">
+                                <div class="col-md-12 mb-3">
+                                    <div class="input-group">
+                                        <label for="API Key"></label>
+                                        <input type="text" class="form-control" name="appid" style="width: 400px;" placeholder="API Key For OpenWeather Map (Optional)" value="{{last_appid}}">
+                                    </div>
+                                </div>
+                            </div>                                                                                                                                           
                             <div class="col-12">
                                 <button class="btn btn-success w-100" type="submit">Forecast</button>
                             </div>
@@ -38,11 +49,11 @@
                             </div>
                         {% endif %}
                     </form>
-                    {% if Weather_Data %}
+                    {% if raw_json %}
         <button class="btn btn-primary" id="downloadButton">
             <i class="fas fa-download"></i> Weather Forecast Data (JSON)
           </button>          
-{% endif %}
+            {% endif %}
                 </div>
             </div>
             <div class="col-md-6">
@@ -52,14 +63,7 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    {% if Weather_Data %}
     {% if detail == "current" %}
         <div class="forecast-table">
             <div class="forecast-container1">
@@ -103,7 +107,7 @@
                 </div>
             </div>
         </div>
-    {% elif Weather_Data %}
+    {% else %}
         <div class="forecast-table">
             <div class="forecast-container">
                 <div class="today forecast">
@@ -177,36 +181,38 @@
             </div>
         </div>
     {% endif %}
+    {% endif %}
     <style>
         .forecast-table {
-            padding-top:20px;
-            max-width: 1350px; /* Adjust the max-width as needed */
-            margin: 0 auto; /* Center the container horizontally */
+            padding-top: 180px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
-        
+    
+        .white-block {
+            background-color: rgba(255, 255, 255, 0.6); 
+            padding: 20px;
+            border-radius: 10px;
+        }
+    
         #map {
             margin-top: 20px;
             height: 400px;
             width: 100%;
         }
-
-        .white-block {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
+    
         .container-fluid {
             width: 90%;
             margin: 0 auto;
+            opacity: 0.95;
         }
-
+    
         @media screen and (orientation: landscape) {
             .form-inline.mb-3 .col-md-12 {
                 flex-basis: 80%;
             }
         }
-    </style>
+    </style>    
     <script>
     const Wea_Data = JSON.parse("{{ raw_json|escapejs }}");
 
@@ -229,27 +235,5 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8iXNtZAqryhfTgE5xrUInUzXWBqoSg5Q&callback=initMap"
             async
             defer></script>
-    <script>
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById("map"), {
-                center: {
-                    lat: 28.7041,
-                    lng: 77.1025,
-                },
-                zoom: 8,
-            });
-        
-            var marker = new google.maps.Marker({
-                map: map,
-                draggable: true,
-            });
-        
-            google.maps.event.addListener(map, "click", function (event) {
-                marker.setPosition(event.latLng);
-                document.getElementById("id_latitude").value = event.latLng.lat();
-                document.getElementById("id_longitude").value = event.latLng.lng();
-            });
-        }
-    </script>        
-    {% comment %} <script src="{% static 'js/google_map.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/google_map.js' %}"></script>
 {% endblock %}
