@@ -1,10 +1,16 @@
 from django.db import models
 
-
 class WeatherForecast(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
-    detailing_type = models.CharField(max_length=20)
+    DETAIL_CHOICES = [
+        ('current', 'Current Weather'),
+        ('three-hour', '3-Hour Forecast 5 Days'),
+        ('hourly', 'Hourly Forecast 4 days'),
+        ('daily', 'Daily Forecast 16 days'),
+        ('climate', 'Climatic Forecast 30 day'),
+    ]
+    detailing_type = models.CharField(max_length=20, choices=DETAIL_CHOICES)
     weather_data = models.JSONField()
     timestamp = models.DateTimeField(auto_now=True)
 

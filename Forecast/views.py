@@ -53,13 +53,11 @@ class weatherapi(ViewSet):
             return Response({'detail' : 'Invalid Parameters!'},status=status.HTTP_400_BAD_REQUEST)
         response = requests.get(api_url)
         weather_data = response.json()
-        if weather_forecast:
-            weather_forecast.weather_data = weather_data
-            if int(weather_data['cod']) == 200:
+        if weather_forecast and int(weather_data['cod']) == 200:
+                weather_forecast.weather_data = weather_data
                 weather_forecast.save()
-        else:
+        elif int(weather_data['cod']) == 200:
             WeatherForecast.objects.create(latitude=lat, longitude=lon, detailing_type=detail, weather_data=weather_data)
-            
         return Response(weather_data)
     
     def is_data_up_to_date(weather_forecast):
