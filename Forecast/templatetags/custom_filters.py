@@ -5,7 +5,10 @@ register = template.Library()
 
 @register.filter
 def unix_to_datetime(unix_time):
-    return datetime.datetime.fromtimestamp(unix_time)
+    datetime_obj = datetime.datetime.fromtimestamp(unix_time)
+    formatted_datetime = datetime_obj.strftime("%I:%M %p, %b %d, %A")  # Format the datetime
+    return formatted_datetime
+
 
 
 @register.filter

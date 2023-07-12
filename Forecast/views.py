@@ -17,8 +17,8 @@ def index(request):
     context = {}
     form = WeatherForecastForm()
     context['form'] = form
-    if request.method == 'POST':
-        form = WeatherForecastForm(request.POST)
+    if request.method == 'GET':
+        form = WeatherForecastForm(request.GET)
         if form.is_valid():
             lat = form.cleaned_data['latitude']
             lon = form.cleaned_data['longitude']
@@ -27,7 +27,7 @@ def index(request):
             api_endpoint_url = f'{host_url}/api/weather?lat={lat}&lon={lon}&detail={detailing_type}'
             Weather_data = requests.get(api_endpoint_url).json()
             if int(Weather_data['cod']) != 200:
-                context['errors'] = 'Api Key Dosen\'t have proper Authentication'
+                context['errors'] = 'Api Key Dosen\'t have Required Authentication (Limited Access).'
                 Weather_data = None
             context['Weather_Data'] = Weather_data
             context['raw_json'] = json.dumps(Weather_data)
@@ -36,6 +36,7 @@ def index(request):
         else:
             context['errors'] = form.errors
     return render(request, 'forecast/index.html', context)
+
 
 class weatherapi(ViewSet):
     permission_classes = [AllowAny]

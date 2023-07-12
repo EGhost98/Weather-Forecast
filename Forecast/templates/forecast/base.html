@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
-    <!-- Loading third party fonts -->
+    <!-- Loading third-party fonts -->
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
     <link href="{% static 'fonts/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Loading main css file -->
     <style>
         body {
             background-image: url("{% static 'background.jpg' %}");
@@ -23,19 +22,13 @@
             height: 100vh;
             padding-top: 60px;
         }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-            margin-top: 60px;
+        /* Custom navbar styles */
+        .navbar {
+            height: 55px;
+            background-color: #000000;
         }
-
-        .form-group label {
-            font-weight: bold;
+        .site-title {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -44,7 +37,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a href="{% url 'index' %}" class="branding">
             <div class="d-flex align-items-center">
-                <img src="{% static 'logo.png'  %}" alt="" class="logo" width="50" height="auto">
                 <div class="navbar-brand">
                     <h1 class="site-title">Weathercast</h1>
                 </div>
@@ -56,10 +48,24 @@
         </button>
     </nav>
     
-
     {% block content %}
     {% endblock %}
-
+    <footer class="footer bg-dark text-light py-3" style="position: fixed; bottom: 0; width: 100%;">
+    </footer>
+    
+    <style>
+        .square-outline {
+            display: inline-block;
+            padding: 5px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+        }
+    
+        .square-outline a {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
     <!-- Add Bootstrap JS dependencies (jQuery and Bootstrap) for the collapsible navbar -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

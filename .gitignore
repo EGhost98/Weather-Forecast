@@ -4,4 +4,5 @@ env/
 #Enviromnt Variable
 .env
 
+#Testing for Google Map Plugin
 test.html
