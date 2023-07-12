@@ -62,4 +62,6 @@ class weatherapi(ViewSet):
     
     def is_data_up_to_date(weather_forecast):
         delta = timezone.now() - weather_forecast.timestamp
+        # print(weather_forecast.timestamp)
+        # print(delta.total_seconds())
         return delta.total_seconds() <= int(settings.LOCAL_DATA_EXPIRATION)

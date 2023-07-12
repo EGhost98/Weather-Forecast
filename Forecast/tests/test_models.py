@@ -7,7 +7,7 @@ from Forecast.models import WeatherForecast
 class WeatherForecastModelTest(TestCase):
     def setUp(self):
         super().setUp()
-        test_data_path = os.path.join(os.path.dirname(__file__), 'test1.json')
+        test_data_path = os.path.join(os.path.dirname(__file__), 'test_data.json')
         with open(test_data_path) as file:
             self.json_data = json.load(file)
 

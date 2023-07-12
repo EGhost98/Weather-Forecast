@@ -1,0 +1,46 @@
+{
+    "coord": {
+        "lon": 77.8939,
+        "lat": 29.8646
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 299.98,
+        "feels_like": 302.69,
+        "temp_min": 299.98,
+        "temp_max": 299.98,
+        "pressure": 1003,
+        "humidity": 82,
+        "sea_level": 1003,
+        "grnd_level": 973
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 2.49,
+        "deg": 123,
+        "gust": 4.71
+    },
+    "clouds": {
+        "all": 96
+    },
+    "dt": 1689133995,
+    "sys": {
+        "type": 1,
+        "id": 9162,
+        "country": "IN",
+        "sunrise": 1689119744,
+        "sunset": 1689169907
+    },
+    "timezone": 19800,
+    "id": 1258044,
+    "name": "Roorkee",
+    "cod": 200
+}
