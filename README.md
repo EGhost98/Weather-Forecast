@@ -5,7 +5,7 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 - [WeatherCast](https://weather-forecast-plum.vercel.app/)
 
 ## Screenshots -- 
-![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/19207655-75d4-4968-bc5f-ebc74bcc27a7)
+![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/cc8b05aa-554d-44f0-a30b-1f7bfe29222b)
 
 ![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/4197caf8-77ee-4ae6-ba19-df411e753755)
 
