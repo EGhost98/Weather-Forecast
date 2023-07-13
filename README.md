@@ -63,6 +63,8 @@ The application runs on the local development server when the script is executed
 
 - **Vercel**: Vercel is a cloud platform designed for hosting and deploying web applications. It provides an easy and seamless deployment process, making it convenient to deploy the Weathercast application to the web.
 
+- **POSTMAN**: POSTMAN is a popular API development and testing tool. It was used in this project for testing both custom API endpoints and OpenWeatherMap API endpoints. POSTMAN provides a user-friendly interface to send API requests, inspect responses, and automate testing workflows.
+
 - **Other Libraries and Dependencies**: The project may utilize additional Python libraries and dependencies to enhance specific functionality. For example, the `requests` library may be used for making HTTP requests, `unittest` or `mock` for testing, and other libraries based on the project's requirements.
 
 ## Project Structure
