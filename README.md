@@ -5,6 +5,10 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 - [WeatherCast](https://weather-forecast-plum.vercel.app/)
 
 ## Screenshots -- 
+![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/19207655-75d4-4968-bc5f-ebc74bcc27a7)
+
+![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/4197caf8-77ee-4ae6-ba19-df411e753755)
+
 
 ## Table of Contents
 
@@ -15,6 +19,7 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 - [Models Explanation](#models-explanation)
 - [URL Patterns](#url-patterns)
 - [Views Explanation](#views-explanation)
+- [Custom API Endpoint](#custom-api-endpoint)
 - [Tests Explanation](#tests-explanation)
 - [Key Takeaways](#key-takeaways)
 - [References](#references)
@@ -144,7 +149,7 @@ The `urls.py` file in the `Forecast` app defines the URL patterns for the applic
 
 The URL patterns defined in `urls.py` determine how incoming requests are mapped to specific views and API endpoints in the `Forecast` app.
 
-## Forecast/views Explanation
+## views Explanation
 
 The `views.py` file in the `Forecast` app contains the view functions that handle HTTP requests and render templates.
 
@@ -158,9 +163,9 @@ The `views.py` file in the `Forecast` app contains the view functions that handl
 
 The views defined in `views.py` handle the rendering of templates, processing form data, and interacting with the OpenWeatherMap API to retrieve and store weather data. The `weatherapi` view provides the API endpoint for retrieving weather data based on latitude, longitude, and detailing type.
 
-## API Endpoint (`/api/weather`)
+## Custom API Endpoint
 
-The Weathercast app includes a custom API endpoint that provides weather forecast data based on latitude and longitude coordinates. The endpoint expects the following parameters:
+The Weathercast app includes a custom API endpoint (`/api/weather`) that provides weather forecast data based on latitude and longitude coordinates. The endpoint expects the following parameters:
 
 - **lat**: Latitude value (float) representing the location coordinates.
 - **lon**: Longitude value (float) representing the location coordinates.
