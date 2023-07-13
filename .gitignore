@@ -10,3 +10,6 @@ test.html
 
 #Static Files for Local Server (python manage.py collectstatic)
 staticfiles_build/static/
+
+#Local Database For testing purposes
+db.sqlite3
