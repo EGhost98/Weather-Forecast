@@ -7,7 +7,8 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 ## Screenshots -- 
 ![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/cc8b05aa-554d-44f0-a30b-1f7bfe29222b)
 
-![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/08b86be3-e75e-4498-8683-84a7c11a676c)
+![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/37cb13a8-1b8b-4710-8cb4-3c65eedc36f2)
+
 
 ## Table of Contents
 
