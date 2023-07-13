@@ -7,8 +7,7 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 ## Screenshots -- 
 ![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/cc8b05aa-554d-44f0-a30b-1f7bfe29222b)
 
-![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/4197caf8-77ee-4ae6-ba19-df411e753755)
-
+![image](https://github.com/EGhost98/Weather-Forecast/assets/76267623/08b86be3-e75e-4498-8683-84a7c11a676c)
 
 ## Table of Contents
 
@@ -28,7 +27,7 @@ Weathercast is a weather forecasting application that utilizes the OpenWeatherMa
 To run the project, follow these steps:
 
 1. Clone the repository: `git clone <repository_url>`
-2. Create a Virtual Python Enviroment `python -m venv env`.
+2. Create a Virtual Python Environment `python -m venv env`.
 3. Activate the Virtual Environment (if using Git-Bash) `source env/Scripts/Activate`
 4. Navigate to the project directory: `cd Weather-Forecast`
 5. Install the dependencies: `pip install -r requirements.txt`
