@@ -149,7 +149,7 @@ The `urls.py` file in the `Forecast` app defines the URL patterns for the applic
 
 The URL patterns defined in `urls.py` determine how incoming requests are mapped to specific views and API endpoints in the `Forecast` app.
 
-## views Explanation
+## Views Explanation
 
 The `views.py` file in the `Forecast` app contains the view functions that handle HTTP requests and render templates.
 
