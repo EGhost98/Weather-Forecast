@@ -179,8 +179,6 @@ Developers can utilize the optional `appid` parameter to include their own API k
 
 The API endpoint enables seamless integration of weather forecast functionality into external applications by making requests to the specified endpoint with the required parameters.
 
-Feel free to explore the API endpoint further and adapt it to suit your specific requirements or extend its functionality as needed.
-
 ## Tests Explanation
 
 The `Forecast/tests` directory contains individual test files for different components of the app. Here's an explanation of each file, categorizing them as unit tests or integration tests:
@@ -197,19 +195,6 @@ The `Forecast/tests` directory contains individual test files for different comp
 
 Each test file covers specific components of the app and is categorized as either unit tests or integration tests based on its focus. Unit tests isolate specific components for testing, while integration tests test the interaction and integration between different components.
 
-## Google Maps Integration
-
-The Weathercast app integrates Google maps to provide an interactive map interface for latitude and longitude selection. Users can easily choose specific coordinates by interacting with the embedded map plugin. This integration enhances the user experience and ensures accurate coordinate retrieval for weather data.
-
-## OpenWeatherMap API
-
-The Weathercast app allows users to use their own API key from OpenWeatherMap for weather forecasting. This feature enables users to access premium weather data and leverage personalized features offered by OpenWeatherMap.
-
-## Caching Mechanism
-
-The Weathercast app incorporates a caching mechanism to store weather data locally. This mechanism improves performance and reduces API calls by storing previously retrieved weather data. The cached data is utilized when available, reducing the dependency on external API requests and enhancing the app's responsiveness.```
-
-
 ## Key Takeaways
 
 During the development of this project, several special features were implemented to enhance its functionality and user experience. Here are the key takeaways and special features of the Weathercast app:
@@ -225,6 +210,8 @@ During the development of this project, several special features were implemente
 5. **Caching and Data Expiration**: The app employs a caching mechanism to store weather data locally. It checks the freshness of the data using a timestamp and expires the data after a configurable time interval, ensuring up-to-date weather information.
 
 6. **Unit Testing and Test Coverage**: The project includes a comprehensive set of unit tests and integration tests to validate the functionality of different components, such as forms, models, views, and templates. This ensures reliable and robust code behavior.
+   
+7. **Download Raw Weather Data**: Users can download the raw JSON data fetched from the OpenWeatherMap API. This feature allows users to access the original weather data and use it for further analysis or processing.
 
 These special features collectively enhance the Weathercast app by providing accurate weather forecasting, customization options, integration with external APIs, and an improved user interface. They contribute to an enhanced user experience and make the app more versatile and reliable.
 
